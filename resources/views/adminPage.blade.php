@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.noColumns')
 @section('title')
 Сообщения пользователей
 @endsection
