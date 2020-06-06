@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $feedbacks = Feedback::orderBy('created_at', 'desc')->get();
+        $feedbacks = Feedback::latest()->get();
 
         return view('adminPage', compact('feedbacks'));
     }

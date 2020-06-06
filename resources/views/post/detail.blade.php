@@ -13,12 +13,12 @@
 
     </div><!-- /.blog-post -->
     @can('update', $post)
-        <form id="delete-post" method="POST" action="/posts/{{$post->slug}}">
+        <form id="delete-post" method="POST" action="{{ route('posts.destroy', ['post' => $post->slug]) }}">
             @csrf
             @method('DELETE')
         </form>
         <div>
-            <a class="btn btn-outline-primary" href="/posts/{{$post->slug}}/edit">Редактировать</a>
+            <a class="btn btn-outline-primary" href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать</a>
             <a class="btn btn-outline-secondary" href="#" onClick="document.getElementById('delete-post').submit();">Удалить</a>
         </div>
     @endcan

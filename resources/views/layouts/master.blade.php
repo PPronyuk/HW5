@@ -29,11 +29,11 @@
             </div>
             <div class="col-3 d-flex justify-content-end align-items-center">
             @guest
-                <a class="btn btn-sm btn-outline-secondary" href="/login">Login</a>
-                <a class="btn btn-sm btn-outline-secondary" href="/register">Register</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{{ route('login') }}">Login</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{{ route('register') }}">Register</a>
             @endguest
             @auth
-                <form method="POST" action="/logout">
+                <form method="POST" action="{{ route('logout') }}">
                     @CSRF
                     <button class="btn btn-sm btn-outline-secondary">Logout</button>
                 </form>
@@ -45,16 +45,16 @@
 
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-start">
-                <a class="p-2 text-muted @if (Route::currentRouteName() == 'home') active @endif" href="/">Главная</a>
-                <a class="p-2 text-muted @if (Route::currentRouteName() == 'about') active @endif" href="/about">О нас</a>
-                <a class="p-2 text-muted @if (Route::currentRouteName() == 'contacts') active @endif" href="/contacts">Контакты</a>
-                <a class="p-2 text-muted @if (Route::currentRouteName() == 'createPost') active @endif" href="/posts/create">Создать статью</a>
-                <a class="p-2 text-muted pull-right @if (Route::currentRouteName() == 'adminFeedbacks') active @endif" href="/admin/feedbacks">Админ. Раздел</a>
+                <a class="p-2 text-muted @if (Route::currentRouteName() == 'home') active @endif" href="{{ route('home') }}">Главная</a>
+                <a class="p-2 text-muted @if (Route::currentRouteName() == 'about') active @endif" href="{{ route('about') }}">О нас</a>
+                <a class="p-2 text-muted @if (Route::currentRouteName() == 'contacts') active @endif" href="{{ route('contacts') }}">Контакты</a>
+                <a class="p-2 text-muted @if (Route::currentRouteName() == 'posts.create') active @endif" href="{{ route('posts.create') }}">Создать статью</a>
+                <a class="p-2 text-muted pull-right @if (Route::currentRouteName() == 'adminFeedbacks') active @endif" href="{{ route('adminFeedbacks') }}">Админ. Раздел</a>
             </nav>
         </div>
 
 </div>
-@if(session()->has('message'))
+@if (session()->has('message'))
     @include('layouts.message')
 @endif
 <main role="main" class="container">

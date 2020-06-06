@@ -13,17 +13,17 @@ class PostRequest extends BlogFormRequest
      */
     public function rules()
     {
-        $rules =  ['name' => 'required|min:5|max:100',
+        $rules =  [
+            'name' => 'required|min:5|max:100',
             'preview_text' => 'required|max:255',
             'detail_text' => 'required',
             'published' => '',
+            'slug' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('posts')->ignore(request()->post_id ?? 0)
+            ]
         ];
-
-        if ('PATCH' == request()->method) {
-            $rules['slug'] = ['required', 'alpha_dash', Rule::unique('posts')->ignore(request()->post_id),];
-        } else {
-            $rules['slug'] = 'required|alpha_dash|unique:posts';
-        }
 
         return $rules;
     }

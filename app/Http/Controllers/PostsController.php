@@ -21,7 +21,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('published', 1)->orderBy('created_at', 'desc')->get();
+        $posts = Post::where('published', 1)->latest()->get();
 
         return view('home', compact('posts'));    //
     }

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="col-12 mb-3">
-    <form method="POST" action="/posts">
+    <form method="POST" action="{{ route('posts.store') }}">
         @include('post.formFields')
 
         <button type="submit" class="btn btn-primary">Добавить</button>

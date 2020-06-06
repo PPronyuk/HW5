@@ -13,7 +13,7 @@
         @if (session('msgSent'))
             <div class="alert-success">Сообщение отправлено.</div>
         @endif
-        <form method="POST" action="/contacts">
+        <form method="POST" action="{{ route('feedbacks.create') }}">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
