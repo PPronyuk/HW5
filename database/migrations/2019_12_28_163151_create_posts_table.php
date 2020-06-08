@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('owner')
+            $table->bigInteger('owner_id')
                   ->nullable(false);
             $table->string('slug', 255)
                   ->unique()
