@@ -9,6 +9,8 @@ use App\Notifications\PostChanged;
 
 class PostsController extends Controller
 {
+    public $redirectTo = '/posts';
+
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
@@ -57,7 +59,7 @@ class PostsController extends Controller
         message($message);
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/posts');
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -82,6 +84,7 @@ class PostsController extends Controller
     {
         $this->authorize('update', $post);
         $validatedInput = $request->validated();
+
         $post->update($validatedInput);
 
         $post->updateTags($request->tags);
@@ -91,7 +94,7 @@ class PostsController extends Controller
         message($message);
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/posts');
+        return redirect($this->redirectTo);
     }
 
     public function destroy(Post $post)
@@ -103,6 +106,6 @@ class PostsController extends Controller
         message($message, 'danger');
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/');
+        return redirect($this->redirectTo);
     }
 }

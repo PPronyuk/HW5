@@ -18,8 +18,8 @@
             @method('DELETE')
         </form>
         <div>
-            <a class="btn btn-outline-primary" href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать</a>
-            <a class="btn btn-outline-secondary" href="#" onClick="document.getElementById('delete-post').submit();">Удалить</a>
+             <a class="btn btn-outline-primary" href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать</a>
+             <a class="btn btn-outline-secondary" href="#" onClick="document.getElementById('delete-post').submit();">Удалить</a>
         </div>
     @endcan
     <div class="col-12 text-right mb-3">

@@ -49,7 +49,10 @@
                 <a class="p-2 text-muted @if (Route::currentRouteName() == 'about') active @endif" href="{{ route('about') }}">О нас</a>
                 <a class="p-2 text-muted @if (Route::currentRouteName() == 'contacts') active @endif" href="{{ route('contacts') }}">Контакты</a>
                 <a class="p-2 text-muted @if (Route::currentRouteName() == 'posts.create') active @endif" href="{{ route('posts.create') }}">Создать статью</a>
-                <a class="p-2 text-muted pull-right @if (Route::currentRouteName() == 'adminFeedbacks') active @endif" href="{{ route('adminFeedbacks') }}">Админ. Раздел</a>
+@admin
+                <a class="p-2 text-muted pull-right @if (Route::currentRouteName() == 'admin.feedbacks') active @endif" href="{{ route('admin.feedbacks') }}">Сообщения</a>
+                <a class="p-2 text-muted pull-right @if (Route::currentRouteName() == 'admin.posts.index') active @endif" href="{{ route('admin.posts.index') }}">Список статей</a>
+@endadmin
             </nav>
         </div>
 

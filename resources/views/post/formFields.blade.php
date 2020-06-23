@@ -43,7 +43,13 @@ $tags = isset($post) ? implode(',', $post->tags->pluck('name')->toArray()) : '';
 
 
 </div>
+
+@admin
+@error('published')
+<div class="alert-danger">{{$message}}</div>
+@enderror
 <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" name="published" id="published" value="1" checked>
+    <input type="checkbox" class="form-check-input" name="published" id="published" value="1" @if ((isset($post) && $post->published) || old('published')) checked @endif>
     <label class="form-check-label" for="published">Опубликовать</label>
 </div>
+@endadmin

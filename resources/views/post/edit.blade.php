@@ -4,7 +4,13 @@
 @endsection
 @section('content')
     <div class="col-12 mb-3">
-        <form method="POST" action="{{ route('posts.update', ['post' => $post->slug]) }}">
+        <form method="POST" action="
+        @admin
+            {{ route('admin.posts.update', ['post' => $post->slug]) }}
+        @else
+            {{ route('posts.update', ['post' => $post->slug]) }}
+        @endadmin
+            ">
             @method('patch')
             @include('post.formFields')
             <input type="hidden" name="post_id" value="{{$post->id}}">

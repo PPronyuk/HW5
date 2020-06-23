@@ -138,9 +138,7 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'published' => 'Только администратор может опубликовать статью!',
     ],
 
     /*

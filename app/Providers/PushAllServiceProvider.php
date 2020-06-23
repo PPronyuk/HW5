@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class ViewServiceProvider extends ServiceProvider
+class PushAllServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -14,7 +13,12 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('PushAll', function() {
+            return new \App\Service\PushAll(
+                config('services.pushall.channel'),
+                config('services.pushall.key')
+            );
+        });
     }
 
     /**
@@ -24,6 +28,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       View::composer('*', 'App\Http\View\Composers\ViewComposer');
+        //
     }
 }

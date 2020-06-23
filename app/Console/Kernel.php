@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Date;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('post:notify', ['--start=' . now()->subDays(7)->toDateString(), '--end=' . now()->toDateString()])->mondays()->at('10:00');
     }
 
     /**

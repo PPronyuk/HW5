@@ -27,7 +27,7 @@ class CreatePostsTable extends Migration
             $table->longText('detail_text')
                   ->nullable(false);
             $table->boolean('published')
-                  ->default(true);
+                  ->default(false);
             $table->timestamps();
         });
     }
