@@ -6,12 +6,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use App\Notifications\PostChanged;
+use Illuminate\Support\Facades\Route;
 
 class PostsController extends Controller
 {
+    public $redirectTo;
+
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->redirectTo = route('posts.index');
     }
 
     /**
@@ -23,7 +27,7 @@ class PostsController extends Controller
     {
         $posts = Post::where('published', 1)->latest()->get();
 
-        return view('home', compact('posts'));    //
+        return view('home', compact('posts'));
     }
 
     /**
@@ -57,7 +61,7 @@ class PostsController extends Controller
         message($message);
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/posts');
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -82,6 +86,7 @@ class PostsController extends Controller
     {
         $this->authorize('update', $post);
         $validatedInput = $request->validated();
+
         $post->update($validatedInput);
 
         $post->updateTags($request->tags);
@@ -91,7 +96,7 @@ class PostsController extends Controller
         message($message);
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/posts');
+        return redirect($this->redirectTo);
     }
 
     public function destroy(Post $post)
@@ -103,6 +108,6 @@ class PostsController extends Controller
         message($message, 'danger');
         admin()->notify(new PostChanged($post, $message));
 
-        return redirect('/');
+        return redirect($this->redirectTo);
     }
 }

@@ -2,11 +2,17 @@
 
 namespace App;
 
+use App\Event\PostPublished;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     protected $guarded = [];
+
+    protected $dispatchesEvents = [
+        'created' => PostPublished::class,
+        'updated' => PostPublished::class,
+    ];
 
     public function getRouteKeyName()
     {
