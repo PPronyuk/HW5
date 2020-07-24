@@ -22,7 +22,7 @@ class PostNotify extends Command
      *
      * @var string
      */
-    protected $description = 'Рассылка уведолмлений о новых постах пользователям за указанный период времени';
+    protected $description = 'Рассылка уведомлений о новых постах пользователям за указанный период времени';
 
     /**
      * Execute the console command.
