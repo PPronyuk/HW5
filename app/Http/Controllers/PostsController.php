@@ -6,14 +6,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use App\Notifications\PostChanged;
+use Illuminate\Support\Facades\Route;
 
 class PostsController extends Controller
 {
-    public $redirectTo = '/posts';
+    public $redirectTo;
 
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->redirectTo = route('posts.index');
     }
 
     /**
@@ -25,7 +27,7 @@ class PostsController extends Controller
     {
         $posts = Post::where('published', 1)->latest()->get();
 
-        return view('home', compact('posts'));    //
+        return view('home', compact('posts'));
     }
 
     /**

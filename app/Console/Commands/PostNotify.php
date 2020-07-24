@@ -6,7 +6,7 @@ use App\Notifications\NewPostPublished;
 use App\Post;
 use App\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Date;
 
 class PostNotify extends Command
 {
@@ -15,7 +15,7 @@ class PostNotify extends Command
      *
      * @var string
      */
-    protected $signature = 'post:notify {--start= : Дата начала периода в формате YYYY-MM-DD} {--end= : Дата окончания периода в формате YYYY-MM-DD}';
+    protected $signature = 'post:notify {--start=YYYY-MM-DD : Дата начала периода} {--end=YYYY-MM-DD : Дата окончания периода}';
 
     /**
      * The console command description.
@@ -25,38 +25,13 @@ class PostNotify extends Command
     protected $description = 'Рассылка уведолмлений о новых постах пользователям за указанный период времени';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        $validator = Validator::make($this->option(), [
-            'start' => ['required', 'date'],
-            'end' => ['required', 'date'],
-        ]);
-
-        if ($validator->fails()) {
-            foreach ($validator->errors()->all() as $error) {
-                $this->error($error);
-            }
-
-            return false;
-        }
-
-        $posts = Post::whereDate('created_at', '>=', $this->option('start'))
-            ->whereDate('created_at', '<', $this->option('end'))
+        $posts = Post::whereBetween('created_at', [Date::create($this->option('start')), Date::create($this->option('end'))])
             ->where('published', true)
             ->get();
 

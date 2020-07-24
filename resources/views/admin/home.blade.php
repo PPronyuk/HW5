@@ -1,3 +1,3 @@
 @extends('home')
-@section('title')Администрирвоание статей@endsection
+@section('title')Администрирвоание@endsection
 

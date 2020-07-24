@@ -6,12 +6,12 @@ use App\Post;
 
 class PostsController extends \App\Http\Controllers\PostsController
 {
-    public $redirectTo = '/admin/posts';
-
     public function __construct()
     {
         parent::__construct();
+
         $this->middleware('admin');
+        $this->redirectTo = route('admin.posts.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class PostsController extends \App\Http\Controllers\PostsController
     {
         $posts = Post::latest()->get();
 
-        return view('home', compact('posts'));
+        return view('admin.home', compact('posts'));
     }
 
 }
